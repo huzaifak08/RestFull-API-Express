@@ -36,6 +36,35 @@ app.post("/students", async (req, res) => {
         res.status(400).send(err);
     }
 
+});
+
+// Read the data of registered Students:
+app.get("/students", async (req, res) => {
+    try {
+        const stusData = await Student.find();
+        res.send(stusData);
+
+    } catch (e) {
+        res.send(e.message);
+    }
+});
+
+// Read data of a single Student:
+app.get("/students/:id", async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const stuData = await Student.findById(_id);
+
+        // Check if data is empty:
+        if (!stuData) {
+            return res.status(404).send();
+        } else {
+            res.send(stuData);
+        }
+
+    } catch (e) {
+        res.status(500).send(e.message); // 500 : Server Error
+    }
 })
 
 app.listen(port, () => {
