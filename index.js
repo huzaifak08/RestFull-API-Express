@@ -101,3 +101,16 @@ app.patch("/students/:id", async (req, res) => {
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
 });
+
+// Routers in Express:
+
+// 1: Create a new router.
+const router = new express.Router();
+
+// 2: We need to define the router.
+router.get("/hunny", (req, res) => {
+    res.send("Hello Whatsup Guys");
+});
+
+// 3: We need to register our router
+app.use(router);
